@@ -4,8 +4,14 @@ const Express = require('express');
 const app = Express();
 
 const dbConnection = require('./db');
+const controllers = require('./controllers');
+const middleware = require('./middleware');
 
 app.use(Express.json());
+app.use(middleware.CORS);
+
+app.use('/user', controllers.userController);
+app.use('/foodlog', controllers.foodController);
 
 dbConnection
   .authenticate()
